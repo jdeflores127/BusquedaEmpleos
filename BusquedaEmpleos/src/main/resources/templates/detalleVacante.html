@@ -12,6 +12,7 @@
 <body>
 	<table>
 		<tr th:each="listado_item: ${detalleVacante_detalleVacante}">
+			<td><img th:src="@{/img/{imagen}(imagen=${listado_item.empresa})}" width="130px" height="130px"></td>
 			<td>
 				<a th:href="@{/vacantes/detalle/{id}(id=${listado_item.id})} ">
 					<div th:text="${listado_item.id}"></div>
@@ -24,6 +25,9 @@
 			<td> 
 				<span th:if="${listado_item.destacado==true}" class="badge badge-primary">Destacado</span>
 				<span th:unless="${listado_item.destacado==true}" class="badge badge-danger">No Destacado</span>
+			</td>
+			<td>
+				<a th:href="@{/vacantes/eliminarLista?id={idVacante}(idVacante=${listado_item.id})}">Eliminar</a>
 			</td>			
 		</tr>
 	</table>
