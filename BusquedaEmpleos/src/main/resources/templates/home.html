@@ -5,7 +5,9 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<h1 th:text="${bienvenida_Home}"></h1>
+	<img th:src="@{/img/logo.png}">
+	
+	<h1 style="display: inline-block;" th:text="${bienvenida_Home}"></h1>
 	<h1>hoy es: [[${fecha_home}]]</h1>
 </body>
 </html>

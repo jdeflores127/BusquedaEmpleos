@@ -12,11 +12,7 @@
 <body>
 	<table>
 		<tr th:each="listado_item: ${detalleVacante_detalleVacante}">
-			<td>
-				<a th:href="@{/vacantes/detalle/{id}(id=${listado_item.id})} ">
-					<div th:text="${listado_item.id}"></div>
-				</a>
-			</td>
+			<td th:text="${listado_item.id}" />
 			<td th:text="${listado_item.nombre}" />
 			<td th:text="${listado_item.descripcion}" />
 			<td th:text="${listado_item.salario}" />

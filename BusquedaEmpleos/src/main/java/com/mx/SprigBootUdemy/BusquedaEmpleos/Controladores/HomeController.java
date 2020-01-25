@@ -22,6 +22,7 @@ public class HomeController {
 		vacante.setSalario(1234.00);
 		vacante.setEstatus(true);
 		vacante.setDestacado(false);
+		
 		Vacante vacante1=new Vacante();
 		vacante1.setId(2);
 		vacante1.setNombre("Ingeniero en sistemas");
@@ -34,10 +35,7 @@ public class HomeController {
 		listVacante.add(vacante1);
 		model.addAttribute("detalleVacante_detalleVacante",listVacante);
 		return "detalleVacante";
-	}
-	
-	
-	
+	}	
 	@GetMapping("/")
 	public String goHome(Model model) {
 		String bienvenida="bienvenidos al sistema de busqueda de empleo";
@@ -47,4 +45,5 @@ public class HomeController {
 		model.addAttribute("salario_home",salario);
 		return "home";
 	}
+
 }

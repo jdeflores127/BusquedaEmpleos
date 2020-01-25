@@ -9,7 +9,6 @@ public class Vacante {
 	private double salario;
 	private Date fecha;
 	private boolean estatus;
-	private String sexo;
 	private boolean destacado;
 	
 	public int getId() {
@@ -47,12 +46,6 @@ public class Vacante {
 	}
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
-	}
-	public String getSexo() {
-		return sexo;
-	}
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
 	}
 	public boolean isDestacado() {
 		return destacado;
