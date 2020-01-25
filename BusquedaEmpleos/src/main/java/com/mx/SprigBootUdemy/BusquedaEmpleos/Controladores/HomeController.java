@@ -3,36 +3,22 @@ package com.mx.SprigBootUdemy.BusquedaEmpleos.Controladores;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
+import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IVacantesService;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private IVacantesService vacanteService;
 	
 	@GetMapping("/detalleVacante")
 	public String godetalleVacante(Model model) {
-		ArrayList<Vacante> listVacante=new ArrayList<Vacante>();
-		Vacante vacante=new Vacante();
-		vacante.setId(1);
-		vacante.setNombre("Licenciado en contabilidad");
-		vacante.setDescripcion("Para realizar contabilidad de la empresa");
-		vacante.setSalario(1234.00);
-		vacante.setEstatus(true);
-		vacante.setDestacado(false);
-		
-		Vacante vacante1=new Vacante();
-		vacante1.setId(2);
-		vacante1.setNombre("Ingeniero en sistemas");
-		vacante1.setDescripcion("programas");
-		vacante1.setSalario(10000.00);
-		vacante1.setEstatus(false);
-		vacante1.setDestacado(true);
-
-		listVacante.add(vacante);
-		listVacante.add(vacante1);
+		ArrayList<Vacante> listVacante=vacanteService.buscarTodas();
 		model.addAttribute("detalleVacante_detalleVacante",listVacante);
 		return "detalleVacante";
 	}	

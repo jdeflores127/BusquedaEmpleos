@@ -10,6 +10,7 @@ public class Vacante {
 	private Date fecha;
 	private boolean estatus;
 	private boolean destacado;
+	private String empresa;
 	
 	public int getId() {
 		return id;
@@ -52,6 +53,12 @@ public class Vacante {
 	}
 	public void setDestacado(boolean destacado) {
 		this.destacado = destacado;
+	}
+	public String getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 	
 	
