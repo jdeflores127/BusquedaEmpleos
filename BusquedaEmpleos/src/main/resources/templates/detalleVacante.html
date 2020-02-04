@@ -10,6 +10,7 @@
 		crossorigin="anonymous">
 </head>
 <body>
+	<!--  
 	<table>
 		<tr th:each="listado_item: ${detalleVacante_detalleVacante}">
 			<td><img th:src="@{/img/{imagen}(imagen=${listado_item.empresa})}" width="130px" height="130px"></td>
@@ -31,6 +32,27 @@
 			</td>			
 		</tr>
 	</table>
+	-->
+	
+	<!-- Inicio del despliegue de ofertas destacadas -->
+	<div class="container">
+		<h2>Destacados</h2>
+		<div class="row" th:each="listado_item: ${detalleVacante_detalleVacante}">
+			<div class="col-md-3">
+				<img th:src="@{/img/{imagen}(imagen=${listado_item.empresa})}" width="130px" height="130px">
+			</div>
+			<div class="col-md-9">
+				<h2 th:text="${listado_item.nombre}"></h2>
+				<h6 class="card-title"><strong>Categoria:</strong></h6>
+				<h6 class="card-title"><strong>Publicado:</strong></h6>
+				<p th:text="${listado_item.descripcion}"></p>
+				<h6 class="card-title"><strong>Salario:</strong><span th:text="${listado_item.salario}"></span></h6>
+				<a class="btn btn-primary" th:href="@{/vacantes/detalle/{id}(id=${listado_item.id})} ">Ver detalle</a>
+			</div>
+			<hr class="my-4">
+		</div>
+	</div>
+
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value="categorias")
 public class CategoriasController {
 	
-	@GetMapping("/mostrarIndex")
-	public String goMostrarIndex(Model model) {
-		return "categorias/mostrarIndex";
+	@GetMapping("/insertaCategoria")
+	public String goInsertaCategoria(Model model) {
+		return "categorias/insertaCategoria";
 	}
 	@PostMapping("/save")
 	public String goSave(Model model,
@@ -22,6 +22,6 @@ public class CategoriasController {
 		System.out.println("Datos traidos del form");
 		System.out.println("nombre: "+nombre);
 		System.out.println("descripcion: "+descripcion);
-		return "categorias/mostrarIndex";
+		return "categorias/insertaCategoria";
 	}
 }

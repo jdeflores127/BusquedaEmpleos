@@ -45,7 +45,15 @@ public class VacantesServiceImpl implements IVacantesService{
 	@Override
 	public Vacante buscarXId(int id) {
 		System.out.println("Buscaremos por id "+id);
-		return null;
+		Vacante vacante=new Vacante();
+		vacante.setId(1);
+		vacante.setNombre("Licenciado en contabilidad");
+		vacante.setDescripcion("Para realizar contabilidad de la empresa");
+		vacante.setSalario(1234.00);
+		vacante.setEstatus(true);
+		vacante.setDestacado(false);
+		vacante.setEmpresa("scotia.ico");
+		return vacante;
 	}
 
 }

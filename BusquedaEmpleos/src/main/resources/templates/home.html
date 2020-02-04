@@ -1,13 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 </head>
 <body>
 	<img th:src="@{/img/logo.png}">
-	
+
 	<h1 style="display: inline-block;" th:text="${bienvenida_Home}"></h1>
 	<h1>hoy es: [[${fecha_home}]]</h1>
+	
+	
+	<!-- Inicio del formulario de busqueda de empleos -->
+	<div class="jumbotron">
+		<h1 class="display-4">Bienvenido al sistema de busqueda de
+			empleos</h1>
+
+		<p class="lead">El proposito de este sitio es que encuentres una
+			oferta de empleo</p>
+		<hr class="my-4">
+
+		<p>Echa un vistazo a las ofertas</p>
+
+		<form>
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="empleoTXT_home" name="empleoTXT_home" placeholder="Busca un empleo">
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control" id="categoriaTXT_home">
+						<option selected>Seleccione una categoria</option>
+				    	<option>1</option>
+				    </select>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- Fin del formulario de busqueda de empleos -->
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </body>
 </html>
