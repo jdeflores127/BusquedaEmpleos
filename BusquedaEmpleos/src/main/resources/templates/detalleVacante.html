@@ -38,6 +38,18 @@
 	
 	<!-- Inicio del despliegue de ofertas destacadas -->
 	<div class="container">
+		<div class="form-row" th:if="${guardarVacante_guardarVacante!=null}">
+			<div class="form-group col-md-12">
+				<div th:if="${guardarVacante_guardarVacante=='Noexitoso'}" class="alert alert-danger" role="alert">
+					No se inserto el registro
+				</div>
+			</div>
+			<div class="form-group col-md-12">
+				<div th:unless="${guardarVacante_guardarVacante=='Noexitoso'}" class="alert alert-success" role="alert">
+					registro insertado
+				</div>
+			</div>
+		</div>
 		<h2>Destacados</h2>
 		<div class="row" th:each="listado_item: ${detalleVacante_detalleVacante}">
 			<div class="col-md-3">

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IVacantesService;
@@ -34,7 +35,7 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/insertaVacante")
-	public String goInsertaVacante() {
+	public String goInsertaVacante(Vacante vacante) {
 		return "vacantes/insertaVacante";
 	}
 	
@@ -52,14 +53,18 @@ public class VacantesController {
 	}
 	
 	@PostMapping("/guardarVacante")
-	public String guardarVacante(Vacante vacante, BindingResult bindingResult) {
+	public String guardarVacante(Vacante vacante, BindingResult bindingResult, RedirectAttributes attributes) {
+		String exitoso="exitoso";
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error:bindingResult.getAllErrors())
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
 			return "vacantes/insertaVacante";
 		}
 		System.out.println(vacante.toString());
-		return "vacantes/insertaVacante";
+		//Cuando se hace un redirect las varibles en el objeto model se pierden, por lo que hay que usar un atributo flash
+		attributes.addFlashAttribute("guardarVacante_guardarVacante", exitoso);
+		//se realiza peticion get a detalleVacante
+		return "redirect:/detalleVacante";
 	}
 	//metodo para dar formato dd-mm-yyyy a las fechas que se usan para databinding
 	@InitBinder
