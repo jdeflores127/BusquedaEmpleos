@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+	<header th:insert="fragments/BarraHerramientas.html :: BarraHerramientas">
+	</header>
+	<hr>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="card">
+  					<div class="card-header">inserta los datos de una vacante</div>
+  					<div class="card-body">
+						<form th:action="@{/vacantes/guardarVacante}" method="post" th:object="${vacante}">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="insertaVacante_nombre_txt">nombre:</label>
+									<input type="text" class="form-control" id="insertaVacante_nombre_txt" name="nombre" placeholder="inserta el nombre de la vacante">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="insertaVacante_descripcion_txt">descripcion:</label>
+									<input type="text" class="form-control" id="insertaVacante_descripcion_txt" name="descripcion" placeholder="inserta la descripcion de la vacante">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="insertaVacante_categoria_txt">categoria</label>
+									<select id="insertaVacante_categoria_txt" name="insertaVacante_categoria_txt" class="form-control">
+										<option selected></option>
+									</select>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="insertaVacante_estatus_txt">estatus</label>
+									<select id="insertaVacante_estatus_txt" name="estatus" class="form-control">
+										<option selected>Creada</option>
+										<option>Aprobada</option>
+										<option>Eliminada</option>
+									</select>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="insertaVacante_fecha_txt">fecha de publicacion:</label>
+									<input type="text" class="form-control" id="insertaVacante_fecha_txt" name="fecha">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="destacado" id="insertaVacante_destacado_txt" value="1" checked>
+										<label class="form-check-label" for="insertaVacante_destacado_txt">Destacado</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="destacado" id="insertaVacante_destacado_txt" value="0">
+										<label class="form-check-label" for="insertaVacante_destacado_txt">No Destacado</label>
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="insertaVacante_salario_txt">salario ofrecido:</label>
+									<input type="text" class="form-control" id="insertaVacante_salario_txt" name="salario" placeholder="inserte el salario ofrecido en pesos">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="insertaVacante_imagen_txt">imagen:</label>
+									<input type="file" class="form-control-file" id="insertaVacante_imagen_txt" name="insertaVacante_imagen_txt">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-3">
+									<input type="submit" class="btn btn-primary">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-12">
+									<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+										corrige los siguientes errores
+										<ul>
+											<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.js"
+		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+		integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>	
+	<script>  
+		$(function () {
+		    $("#insertaVacante_fecha_txt").datepicker({dateFormat: 'dd-mm-yy'});
+		  }
+		);
+    </script>
+</body>
+</html>

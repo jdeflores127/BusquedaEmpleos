@@ -8,7 +8,7 @@ public class Vacante {
 	private String descripcion;
 	private double salario;
 	private Date fecha;
-	private boolean estatus;
+	private String estatus;
 	private boolean destacado;
 	private String empresa;
 	
@@ -42,10 +42,10 @@ public class Vacante {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public boolean isEstatus() {
+	public String getEstatus() {
 		return estatus;
 	}
-	public void setEstatus(boolean estatus) {
+	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
 	public boolean isDestacado() {
@@ -59,6 +59,12 @@ public class Vacante {
 	}
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
+	}
+	@Override
+	public String toString() {
+		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", salario=" + salario
+				+ ", fecha=" + fecha + ", estatus=" + estatus + ", destacado=" + destacado + ", empresa=" + empresa
+				+ "]";
 	}
 	
 	

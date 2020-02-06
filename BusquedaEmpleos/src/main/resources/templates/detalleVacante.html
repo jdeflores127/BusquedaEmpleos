@@ -10,6 +10,8 @@
 		crossorigin="anonymous">
 </head>
 <body>
+	<header th:insert="fragments/BarraHerramientas.html :: BarraHerramientas">
+	</header>
 	<!--  
 	<table>
 		<tr th:each="listado_item: ${detalleVacante_detalleVacante}">
@@ -47,7 +49,11 @@
 				<h6 class="card-title"><strong>Publicado:</strong></h6>
 				<p th:text="${listado_item.descripcion}"></p>
 				<h6 class="card-title"><strong>Salario:</strong><span th:text="${listado_item.salario}"></span></h6>
-				<a class="btn btn-primary" th:href="@{/vacantes/detalle/{id}(id=${listado_item.id})} ">Ver detalle</a>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<a class="btn btn-primary" th:href="@{/vacantes/detalle/{id}(id=${listado_item.id})} ">Ver detalle</a>
+					<a class="btn btn-primary" th:href="@{/vacantes/eliminaVacante/{id}(id=${listado_item.id})} ">Eliminar</a>
+					<a class="btn btn-primary" th:href="@{/vacantes/modificaVacante/{id}(id=${listado_item.id})} ">Modificar</a>
+				</div>
 			</div>
 			<hr class="my-4">
 		</div>

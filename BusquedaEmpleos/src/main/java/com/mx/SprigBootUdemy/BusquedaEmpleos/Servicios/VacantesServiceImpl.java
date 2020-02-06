@@ -16,7 +16,7 @@ public class VacantesServiceImpl implements IVacantesService{
 		vacante.setNombre("Licenciado en contabilidad");
 		vacante.setDescripcion("Para realizar contabilidad de la empresa");
 		vacante.setSalario(1234.00);
-		vacante.setEstatus(true);
+		vacante.setEstatus("Aprobada");
 		vacante.setDestacado(false);
 		vacante.setEmpresa("scotia.ico");
 		Vacante vacante1=new Vacante();
@@ -24,7 +24,7 @@ public class VacantesServiceImpl implements IVacantesService{
 		vacante1.setNombre("Ingeniero en sistemas");
 		vacante1.setDescripcion("programas");
 		vacante1.setSalario(10000.00);
-		vacante1.setEstatus(false);
+		vacante1.setEstatus("Eliminada");
 		vacante1.setDestacado(true);
 		vacante1.setEmpresa("inbursa.jpeg");
 		Vacante vacante2=new Vacante();
@@ -32,7 +32,7 @@ public class VacantesServiceImpl implements IVacantesService{
 		vacante2.setNombre("Encargado de limpieza");
 		vacante2.setDescripcion("Realizar la limpieza");
 		vacante2.setSalario(6000);
-		vacante2.setEstatus(true);
+		vacante2.setEstatus("Creada");
 		vacante2.setDestacado(false);
 		vacante2.setEmpresa("ViveIndice.png");
 		listVacante.add(vacante);
@@ -50,10 +50,16 @@ public class VacantesServiceImpl implements IVacantesService{
 		vacante.setNombre("Licenciado en contabilidad");
 		vacante.setDescripcion("Para realizar contabilidad de la empresa");
 		vacante.setSalario(1234.00);
-		vacante.setEstatus(true);
+		vacante.setEstatus("Creada");
 		vacante.setDestacado(false);
 		vacante.setEmpresa("scotia.ico");
 		return vacante;
+	}
+
+	@Override
+	public void guardar(Vacante vacante) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
