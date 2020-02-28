@@ -20,51 +20,53 @@
 				<div class="card">
   					<div class="card-header">inserta los datos de una vacante</div>
   					<div class="card-body">
+  						<!-- Se vincula el fromulario con th:object para errores de binding y conservar evitar que se pierdan formulario-->
 						<form th:action="@{/vacantes/guardarVacante}" method="post" th:object="${vacante}">
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="insertaVacante_nombre_txt">nombre:</label>
-									<input type="text" class="form-control" id="insertaVacante_nombre_txt" name="nombre" placeholder="inserta el nombre de la vacante">
+									<!-- Field permite evitar perder los datos del formulario -->
+									<input type="text" class="form-control" th:field="*{nombre}" id="insertaVacante_nombre_txt" name="nombre" placeholder="inserta el nombre de la vacante">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="insertaVacante_descripcion_txt">descripcion:</label>
-									<input type="text" class="form-control" id="insertaVacante_descripcion_txt" name="descripcion" placeholder="inserta la descripcion de la vacante">
+									<input type="text" class="form-control" th:field="*{descripcion}" id="insertaVacante_descripcion_txt" name="descripcion" placeholder="inserta la descripcion de la vacante">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label for="insertaVacante_categoria_txt">categoria</label>
 									<select id="insertaVacante_categoria_txt" name="insertaVacante_categoria_txt" class="form-control">
-										<option selected></option>
+										<option th:each="listadoCategorias_item: ${InsertaVacante_categorias_list}" th:value="${listadoCategorias_item.id}" th:text="${listadoCategorias_item.nombre}"></option>
 									</select>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="insertaVacante_estatus_txt">estatus</label>
-									<select id="insertaVacante_estatus_txt" name="estatus" class="form-control">
-										<option selected>Creada</option>
-										<option>Aprobada</option>
-										<option>Eliminada</option>
+									<select id="insertaVacante_estatus_txt" th:field="*{estatus}" name="estatus" class="form-control">
+										<option value="Creada" selected>Creada</option>
+										<option value="Aprobada">Aprobada</option>
+										<option value="Eliminada">Eliminada</option>
 									</select>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="insertaVacante_fecha_txt">fecha de publicacion:</label>
-									<input type="text" class="form-control" id="insertaVacante_fecha_txt" name="fecha">
+									<input type="text" class="form-control" th:field="*{fecha}" id="insertaVacante_fecha_txt" name="fecha">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="destacado" id="insertaVacante_destacado_txt" value="1" checked>
+										<input class="form-check-input" type="radio" th:field="*{destacado}" name="destacado" id="insertaVacante_destacado_txt" value="1" checked>
 										<label class="form-check-label" for="insertaVacante_destacado_txt">Destacado</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="destacado" id="insertaVacante_destacado_txt" value="0">
+										<input class="form-check-input" type="radio" th:field="*{destacado}" name="destacado" id="insertaVacante_destacado_txt" value="0">
 										<label class="form-check-label" for="insertaVacante_destacado_txt">No Destacado</label>
 									</div>
 								</div>
 								<div class="form-group col-md-6">
 									<label for="insertaVacante_salario_txt">salario ofrecido:</label>
-									<input type="text" class="form-control" id="insertaVacante_salario_txt" name="salario" placeholder="inserte el salario ofrecido en pesos">
+									<input type="text" class="form-control" id="insertaVacante_salario_txt" th:field="*{salario}" name="salario" placeholder="inserte el salario ofrecido en pesos">
 								</div>
 							</div>
 							<div class="form-row">

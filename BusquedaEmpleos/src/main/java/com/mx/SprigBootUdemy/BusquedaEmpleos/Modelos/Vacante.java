@@ -11,7 +11,7 @@ public class Vacante {
 	private String estatus;
 	private boolean destacado;
 	private String empresa;
-	
+	private Categoria categoria;
 	public int getId() {
 		return id;
 	}
@@ -60,12 +60,17 @@ public class Vacante {
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	@Override
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", salario=" + salario
 				+ ", fecha=" + fecha + ", estatus=" + estatus + ", destacado=" + destacado + ", empresa=" + empresa
-				+ "]";
+				+ ", categoria=" + categoria + "]";
 	}
-	
-	
+		
 }

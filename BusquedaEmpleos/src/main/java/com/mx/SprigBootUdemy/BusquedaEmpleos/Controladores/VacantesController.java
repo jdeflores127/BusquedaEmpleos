@@ -1,6 +1,7 @@
 package com.mx.SprigBootUdemy.BusquedaEmpleos.Controladores;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Categoria;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
+import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.ICategoriasService;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IVacantesService;
 
 @Controller
@@ -26,8 +29,9 @@ import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IVacantesService;
 public class VacantesController {
 	@Autowired
 	private IVacantesService vacantesService;
-	
-	@GetMapping("/detalle/{id}")
+	@Autowired
+	private ICategoriasService categoriasService;
+	@GetMapping("/detallnsertae/{id}")
 	public String goDetalle(@PathVariable("id") int idvacante, Model model) {
 		Vacante vacante=vacantesService.buscarXId(idvacante);	
 		model.addAttribute("vacante_Detalle",vacante);
@@ -35,7 +39,9 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/insertaVacante")
-	public String goInsertaVacante(Vacante vacante) {
+	public String goInsertaVacante(Vacante vacante, Model model) {
+		ArrayList<Categoria> categoriaList=categoriasService.buscarTodas();
+		model.addAttribute("InsertaVacante_categorias_list", categoriaList);
 		return "vacantes/insertaVacante";
 	}
 	
