@@ -21,7 +21,7 @@
   					<div class="card-header">inserta los datos de una vacante</div>
   					<div class="card-body">
   						<!-- Se vincula el fromulario con th:object para errores de binding y conservar evitar que se pierdan formulario-->
-						<form th:action="@{/vacantes/guardarVacante}" method="post" th:object="${vacante}">
+						<form th:action="@{/vacantes/guardarVacante}" method="post" th:object="${vacante}" enctype="multipart/form-data">
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="insertaVacante_nombre_txt">nombre:</label>
@@ -72,7 +72,7 @@
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="insertaVacante_imagen_txt">imagen:</label>
-									<input type="file" class="form-control-file" id="insertaVacante_imagen_txt" name="insertaVacante_imagen_txt">
+									<input type="file" class="form-control-file" id="insertaVacante_imagen" name="insertaVacante_imagen">
 								</div>
 							</div>
 							<div class="form-row">

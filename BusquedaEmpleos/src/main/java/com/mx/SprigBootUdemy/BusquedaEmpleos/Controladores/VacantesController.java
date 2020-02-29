@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Categoria;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.ICategoriasService;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IVacantesService;
+import com.mx.SprigBootUdemy.BusquedaEmpleos.Utileria.Utileria;
 
 @Controller
 @RequestMapping(value="/vacantes")
@@ -31,6 +34,8 @@ public class VacantesController {
 	private IVacantesService vacantesService;
 	@Autowired
 	private ICategoriasService categoriasService;
+	@Value("${busquedaEmpleos.rutaImagen}")
+	private String ruta;
 	@GetMapping("/detallnsertae/{id}")
 	public String goDetalle(@PathVariable("id") int idvacante, Model model) {
 		Vacante vacante=vacantesService.buscarXId(idvacante);	
@@ -59,12 +64,21 @@ public class VacantesController {
 	}
 	
 	@PostMapping("/guardarVacante")
-	public String guardarVacante(Vacante vacante, BindingResult bindingResult, RedirectAttributes attributes) {
+	public String guardarVacante(Vacante vacante, @RequestParam("insertaVacante_imagen") MultipartFile imagen, BindingResult bindingResult, RedirectAttributes attributes) {
 		String exitoso="exitoso";
+		
+		//Si ocurre algun error en el dataBinding
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error:bindingResult.getAllErrors())
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
 			return "vacantes/insertaVacante";
+		}
+		//Procesamiento de la imagen
+		if(!imagen.isEmpty()) {
+			String nombreImagen=Utileria.guardarArchivo(imagen, ruta);
+			if(nombreImagen!=null) {
+				vacante.setEmpresa(nombreImagen);
+			}
 		}
 		System.out.println(vacante.toString());
 		//Cuando se hace un redirect las varibles en el objeto model se pierden, por lo que hay que usar un atributo flash
