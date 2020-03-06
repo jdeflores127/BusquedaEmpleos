@@ -1,10 +1,10 @@
 package com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
 public interface IVacantesService {
-	public ArrayList<Vacante> buscarTodas();
+	public List<Vacante> buscarTodas();
 	public Vacante buscarXId(int id);
 	public void guardar(Vacante vacante);
 }

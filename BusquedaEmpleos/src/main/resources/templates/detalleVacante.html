@@ -58,7 +58,7 @@
 			<div class="col-md-9">
 				<h2 th:text="${listado_item.nombre}"></h2>
 				<h6 class="card-title"><strong>Categoria:</strong></h6>
-				<h6 class="card-title"><strong>Publicado:</strong></h6>
+				<h6 class="card-title"><strong>Publicado:</strong><span th:text="${#dates.format(listado_item.fecha,'dd-MM-yyyy')}"></span></h6>
 				<p th:text="${listado_item.descripcion}"></p>
 				<h6 class="card-title"><strong>Salario:</strong><span th:text="${listado_item.salario}"></span></h6>
 				<div class="btn-group" role="group" aria-label="Basic example">

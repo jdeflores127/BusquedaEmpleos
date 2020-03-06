@@ -2,6 +2,7 @@ package com.mx.SprigBootUdemy.BusquedaEmpleos.Controladores;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ public class HomeController {
 	
 	@GetMapping("/detalleVacante")
 	public String godetalleVacante(Model model) {
-		ArrayList<Vacante> listVacante=vacanteService.buscarTodas();
+		List<Vacante> listVacante=vacanteService.buscarTodas();
 		model.addAttribute("detalleVacante_detalleVacante",listVacante);
 		return "detalleVacante";
 	}	

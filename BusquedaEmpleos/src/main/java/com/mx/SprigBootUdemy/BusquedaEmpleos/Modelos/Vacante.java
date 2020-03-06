@@ -2,15 +2,31 @@ package com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+@Entity
+@Table(name="Vacantes")
 public class Vacante {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
 	private String nombre;
 	private String descripcion;
 	private double salario;
 	private Date fecha;
 	private String estatus;
 	private boolean destacado;
+	@Column(name="imagen")
 	private String empresa;
+	private String detalles;
+	@Transient
 	private Categoria categoria;
 	public int getId() {
 		return id;
