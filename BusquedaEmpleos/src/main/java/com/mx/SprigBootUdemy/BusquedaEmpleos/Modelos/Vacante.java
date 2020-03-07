@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -14,7 +15,7 @@ import javax.persistence.Transient;
 @Table(name="Vacantes")
 public class Vacante {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	private String nombre;
@@ -26,7 +27,8 @@ public class Vacante {
 	@Column(name="imagen")
 	private String empresa;
 	private String detalles;
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
 	public int getId() {
 		return id;

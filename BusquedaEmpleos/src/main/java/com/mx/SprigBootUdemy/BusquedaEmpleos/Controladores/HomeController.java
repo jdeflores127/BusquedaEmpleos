@@ -10,13 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
+import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IUsuarioService;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IVacantesService;
 
 @Controller
 public class HomeController {
 	@Autowired
 	private IVacantesService vacanteService;
-	
+	@Autowired
+	private IUsuarioService usuarioService;
 	@GetMapping("/detalleVacante")
 	public String godetalleVacante(Model model) {
 		List<Vacante> listVacante=vacanteService.buscarTodas();
@@ -30,6 +32,7 @@ public class HomeController {
 		model.addAttribute("bienvenida_Home",bienvenida);
 		model.addAttribute("fecha_home",new Date());
 		model.addAttribute("salario_home",salario);
+		usuarioService.buscarTodosUsuarios();
 		return "home";
 	}
 

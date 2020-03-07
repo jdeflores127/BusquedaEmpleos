@@ -25,6 +25,7 @@ import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Categoria;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.ICategoriasService;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.IVacantesService;
+import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.VacantesServiceImpl;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Utileria.Utileria;
 
 @Controller
@@ -64,9 +65,13 @@ public class VacantesController {
 	}
 	
 	@PostMapping("/guardarVacante")
-	public String guardarVacante(Vacante vacante, @RequestParam("insertaVacante_imagen") MultipartFile imagen, BindingResult bindingResult, RedirectAttributes attributes) {
-		String exitoso="exitoso";
+	public String guardarVacante(Vacante vacante, 
+								@RequestParam("insertaVacante_imagen") MultipartFile imagen, 
+								@RequestParam("insertaVacante_categoria_txt")int idCategoria,
+								BindingResult bindingResult, 
+								RedirectAttributes attributes) {
 		
+		String exitoso="exitoso";
 		//Si ocurre algun error en el dataBinding
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error:bindingResult.getAllErrors())
@@ -80,7 +85,11 @@ public class VacantesController {
 				vacante.setEmpresa(nombreImagen);
 			}
 		}
+		Categoria categoria=new Categoria();
+		categoria.setId(idCategoria);
+		vacante.setCategoria(categoria);
 		System.out.println(vacante.toString());
+		vacantesService.guardar(vacante);
 		//Cuando se hace un redirect las varibles en el objeto model se pierden, por lo que hay que usar un atributo flash
 		attributes.addFlashAttribute("guardarVacante_guardarVacante", exitoso);
 		//se realiza peticion get a detalleVacante
