@@ -16,24 +16,24 @@ import javax.persistence.Transient;
 public class Vacante {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	private String nombre;
 	private String descripcion;
-	private double salario;
+	private Double salario;
 	private Date fecha;
 	private String estatus;
-	private boolean destacado;
+	private Boolean destacado;
 	@Column(name="imagen")
 	private String empresa;
 	private String detalles;
 	@ManyToOne
 	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -48,10 +48,10 @@ public class Vacante {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public double getSalario() {
+	public Double getSalario() {
 		return salario;
 	}
-	public void setSalario(double salario) {
+	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
 	public Date getFecha() {
@@ -66,10 +66,10 @@ public class Vacante {
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
-	public boolean isDestacado() {
+	public Boolean isDestacado() {
 		return destacado;
 	}
-	public void setDestacado(boolean destacado) {
+	public void setDestacado(Boolean destacado) {
 		this.destacado = destacado;
 	}
 	public String getEmpresa() {

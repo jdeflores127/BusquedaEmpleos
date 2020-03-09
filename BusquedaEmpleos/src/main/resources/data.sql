@@ -6,9 +6,9 @@ insert into Categorias values
 (5,'Limpieza','Realizar la limpieza de la empresa');
 
 insert into VACANTES values 
-(1,'Para realizar contabilidad de la empresa','auxiliar contable','2020-12-03',1678.98,'Creada',true,'scotia.ico','detalles',4),
-(2,'Para realizar limpieza de la empresa','Encargado de limpieza','1990-01-28',1453.23,'Aprobada',false,'ViveIndice.png','detalles',5),
-(3,'Para realizar programacion de la empresa','Ingeniero en sistemas','2020-04-15',2200.00,'Eliminada',false,'inbursa.jpeg','detalles',2);
+(1,'Para realizar contabilidad de la empresa','auxiliar contable','2020-01-03',1678.98,'Creada',true,'scotia.ico','detalles',4),
+(2,'Para realizar limpieza de la empresa','Encargado de limpieza','2020-03-04',1453.23,'Aprobada',true,'ViveIndice.png','detalles',5),
+(3,'Para realizar programacion de la empresa','Ingeniero en sistemas','2015-04-15',2200.00,'Eliminada',false,'inbursa.jpeg','detalles',2);
 
 insert into Perfiles values
 (1,'Supervisor'),

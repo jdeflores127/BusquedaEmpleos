@@ -10,93 +10,11 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-	<header th:insert="fragments/BarraHerramientas.html :: BarraHerramientas">
-	</header>
+	<header th:insert="fragments/BarraHerramientas.html :: BarraHerramientas"></header>
 	<hr>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="card">
-  					<div class="card-header">inserta los datos de una vacante</div>
-  					<div class="card-body">
-  						<!-- Se vincula el fromulario con th:object para errores de binding y conservar evitar que se pierdan formulario-->
-						<form th:action="@{/vacantes/guardarVacante}" method="post" th:object="${vacante}" enctype="multipart/form-data">
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="insertaVacante_nombre_txt">nombre:</label>
-									<!-- Field permite evitar perder los datos del formulario -->
-									<input type="text" class="form-control" th:field="*{nombre}" id="insertaVacante_nombre_txt" name="nombre" placeholder="inserta el nombre de la vacante">
-								</div>
-								<div class="form-group col-md-6">
-									<label for="insertaVacante_descripcion_txt">descripcion:</label>
-									<input type="text" class="form-control" th:field="*{descripcion}" id="insertaVacante_descripcion_txt" name="descripcion" placeholder="inserta la descripcion de la vacante">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-4">
-									<label for="insertaVacante_categoria_txt">categoria</label>
-									<select id="insertaVacante_categoria_txt" name="insertaVacante_categoria_txt" class="form-control">
-										<option th:each="listadoCategorias_item: ${InsertaVacante_categorias_list}" th:value="${listadoCategorias_item.id}" th:text="${listadoCategorias_item.nombre}"></option>
-									</select>
-								</div>
-								<div class="form-group col-md-4">
-									<label for="insertaVacante_estatus_txt">estatus</label>
-									<select id="insertaVacante_estatus_txt" th:field="*{estatus}" name="estatus" class="form-control">
-										<option value="Creada" selected>Creada</option>
-										<option value="Aprobada">Aprobada</option>
-										<option value="Eliminada">Eliminada</option>
-									</select>
-								</div>
-								<div class="form-group col-md-4">
-									<label for="insertaVacante_fecha_txt">fecha de publicacion:</label>
-									<input type="text" class="form-control" th:field="*{fecha}" id="insertaVacante_fecha_txt" name="fecha">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" th:field="*{destacado}" name="destacado" id="insertaVacante_destacado_txt" value="1" checked>
-										<label class="form-check-label" for="insertaVacante_destacado_txt">Destacado</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" th:field="*{destacado}" name="destacado" id="insertaVacante_destacado_txt" value="0">
-										<label class="form-check-label" for="insertaVacante_destacado_txt">No Destacado</label>
-									</div>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="insertaVacante_salario_txt">salario ofrecido:</label>
-									<input type="text" class="form-control" id="insertaVacante_salario_txt" th:field="*{salario}" name="salario" placeholder="inserte el salario ofrecido en pesos">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="insertaVacante_imagen_txt">imagen:</label>
-									<input type="file" class="form-control-file" id="insertaVacante_imagen" name="insertaVacante_imagen">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-3">
-									<input type="submit" class="btn btn-primary">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-12">
-									<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
-										corrige los siguientes errores
-										<ul>
-											<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
-	</div>
+	<!-- Inicia: formulario de insercion de vacante -->
+	<div th:insert="fragments/FormVacantes :: formularioInsercionModificacion"></div>
+	<!-- Fin: formulario de insercion de vacante -->
 	<script
 		src="https://code.jquery.com/jquery-3.3.1.js"
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -112,12 +30,12 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>	
+		crossorigin="anonymous"></script>
 	<script>  
 		$(function () {
-		    $("#insertaVacante_fecha_txt").datepicker({dateFormat: 'dd-mm-yy'});
-		  }
+	    	$("#insertaVacante_fecha_txt").datepicker({dateFormat: 'dd-mm-yy'});
+	  	}
 		);
     </script>
-</body>
+	</body>
 </html>

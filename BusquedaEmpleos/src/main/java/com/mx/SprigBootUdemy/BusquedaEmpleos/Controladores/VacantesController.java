@@ -37,7 +37,8 @@ public class VacantesController {
 	private ICategoriasService categoriasService;
 	@Value("${busquedaEmpleos.rutaImagen}")
 	private String ruta;
-	@GetMapping("/detallnsertae/{id}")
+	
+	@GetMapping("/detalle/{id}")
 	public String goDetalle(@PathVariable("id") int idvacante, Model model) {
 		Vacante vacante=vacantesService.buscarXId(idvacante);	
 		model.addAttribute("vacante_Detalle",vacante);
@@ -51,23 +52,33 @@ public class VacantesController {
 		return "vacantes/insertaVacante";
 	}
 	
-	@GetMapping("/eliminarVacante")
-	public String eliminarVacante(@RequestParam("id") int idVacante)
+	@GetMapping("/eliminarVacante/{id}")
+	public String eliminarVacante(@PathVariable("id") int idVacante,
+								RedirectAttributes attributes)
 	{
 		System.out.println("el id a eliminar es: "+idVacante);
-		return "home";
-	}
-	@GetMapping("/modificarVacante")
-	public String modificarVacante(@RequestParam("id") int idVacante)
+		vacantesService.eliminarVacante(idVacante);
+		attributes.addFlashAttribute("eliminarVacante_eliminadoExitoso","Eliminado");
+		return "redirect:/detalleVacante";
+	} 
+	@GetMapping("/modificarVacante/{id}")
+	public String modificarVacante(@PathVariable("id") int idVacante, RedirectAttributes attributes)
 	{
 		System.out.println("el id a modificar es: "+idVacante);
+		//Buscamos el id de la vacante a modificar
+		Vacante vacante=this.vacantesService.buscarXId(idVacante);
+		System.out.println(vacante.getCategoria());
+		if(vacante!=null) {
+			attributes.addFlashAttribute("vacante", vacante);
+			return "redirect:/vacantes/insertaVacante";
+		}
 		return "home";
 	}
 	
 	@PostMapping("/guardarVacante")
 	public String guardarVacante(Vacante vacante, 
 								@RequestParam("insertaVacante_imagen") MultipartFile imagen, 
-								@RequestParam("insertaVacante_categoria_txt")int idCategoria,
+								//@RequestParam("insertaVacante_categoria_txt")int idCategoria,
 								BindingResult bindingResult, 
 								RedirectAttributes attributes) {
 		
@@ -85,9 +96,9 @@ public class VacantesController {
 				vacante.setEmpresa(nombreImagen);
 			}
 		}
-		Categoria categoria=new Categoria();
-		categoria.setId(idCategoria);
-		vacante.setCategoria(categoria);
+		//Categoria categoria=new Categoria();
+		//categoria.setId(idCategoria);
+		//vacante.setCategoria(categoria);
 		System.out.println(vacante.toString());
 		vacantesService.guardar(vacante);
 		//Cuando se hace un redirect las varibles en el objeto model se pierden, por lo que hay que usar un atributo flash

@@ -29,21 +29,35 @@
 
 		<p>Echa un vistazo a las ofertas</p>
 
-		<form>
+		<form action="buscarEmpleo" method="post" th:object="${vacante}">
 			<div class="form-group row">
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="empleoTXT_home" name="empleoTXT_home" placeholder="Busca un empleo">
+				<div class="col-sm-3">
+					<input type="text" class="form-control" th:field=*{descripcion} placeholder="Busca un empleo">
 				</div>
-				<div class="col-sm-6">
-					<select class="form-control" id="categoriaTXT_home">
-						<option selected>Seleccione una categoria</option>
-				    	<option>1</option>
+				<div class="col-sm-3">
+					<select class="form-control" th:field=*{categoria.id}>
+				    	<option th:value="null">Seleccione una categoria</option>
+				    	<option th:each="categorias_item: ${detalleVacante_listaCategorias}" th:text="${categorias_item.nombre}" th:value="${categorias_item.id}"></option>
 				    </select>
 				</div>
+				<button type="submit" class="btn btn-primary">Enviar</button>
 			</div>
 		</form>
 	</div>
 	<!-- Fin del formulario de busqueda de empleos -->
+	
+	<!--  Inicio: se renderiza el listado de vacantes destacadas-->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<h3>Ofertas destacadas</h3>
+			</div>
+			<div class="col-md-6"></div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	<div th:insert="fragments/DetalleVacantes.html :: mostrarVacantes"></div>
+	<!--  Fin: se renderiza el listado de vacantes destacadas-->
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Categoria;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Repositorios.CategoriasRepository;
+@Primary
 @Service
 public class CategoriasServiceImpl implements ICategoriasService{
+	/*Se usa primary para decidir que bean se intancia de varios posibles*/
+	//@Qualifier("categoriaEjemploPrimary") se usa para decidir que implementacion se debe inyectar
 	@Autowired
 	private CategoriasRepository categoriasRepository;
 	

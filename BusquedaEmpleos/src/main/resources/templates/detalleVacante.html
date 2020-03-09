@@ -35,8 +35,6 @@
 		</tr>
 	</table>
 	-->
-	
-	<!-- Inicio del despliegue de ofertas destacadas -->
 	<div class="container">
 		<div class="form-row" th:if="${guardarVacante_guardarVacante!=null}">
 			<div class="form-group col-md-12">
@@ -50,26 +48,17 @@
 				</div>
 			</div>
 		</div>
-		<h2>Destacados</h2>
-		<div class="row" th:each="listado_item: ${detalleVacante_detalleVacante}">
-			<div class="col-md-3">
-				<img th:src="@{/img/{imagen}(imagen=${listado_item.empresa})}" width="130px" height="130px">
+		<div class="form-row" th:if="${eliminarVacante_eliminadoExitoso!=null}">
+			<div class="form-group col-md-12">
+				<div class="alert alert-success" role="alert">Se elimino el registro</div>
 			</div>
-			<div class="col-md-9">
-				<h2 th:text="${listado_item.nombre}"></h2>
-				<h6 class="card-title"><strong>Categoria:</strong></h6>
-				<h6 class="card-title"><strong>Publicado:</strong><span th:text="${#dates.format(listado_item.fecha,'dd-MM-yyyy')}"></span></h6>
-				<p th:text="${listado_item.descripcion}"></p>
-				<h6 class="card-title"><strong>Salario:</strong><span th:text="${listado_item.salario}"></span></h6>
-				<div class="btn-group" role="group" aria-label="Basic example">
-					<a class="btn btn-primary" th:href="@{/vacantes/detalle/{id}(id=${listado_item.id})} ">Ver detalle</a>
-					<a class="btn btn-primary" th:href="@{/vacantes/eliminaVacante/{id}(id=${listado_item.id})} ">Eliminar</a>
-					<a class="btn btn-primary" th:href="@{/vacantes/modificaVacante/{id}(id=${listado_item.id})} ">Modificar</a>
-				</div>
-			</div>
-			<hr class="my-4">
 		</div>
+		<h2>Ofertas</h2>
 	</div>
+	<!-- Se muestra el detalle de la vacante -->
+	<div th:insert="fragments/DetalleVacantes.html :: mostrarVacantes"></div>
+	<!-- Inicio del despliegue de ofertas destacadas -->
+	
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
