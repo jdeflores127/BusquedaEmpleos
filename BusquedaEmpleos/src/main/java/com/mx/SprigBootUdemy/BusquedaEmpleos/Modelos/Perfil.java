@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name="Perfiles")
 public class Perfil {
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String perfil;
 	

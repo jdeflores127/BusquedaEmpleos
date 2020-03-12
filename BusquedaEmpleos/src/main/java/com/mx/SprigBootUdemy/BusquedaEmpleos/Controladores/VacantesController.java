@@ -3,6 +3,7 @@ package com.mx.SprigBootUdemy.BusquedaEmpleos.Controladores;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,20 +39,24 @@ public class VacantesController {
 	@Value("${busquedaEmpleos.rutaImagen}")
 	private String ruta;
 	
+	@GetMapping("/mostrarTodas")
+	public String mostrarTodas(Model model) {
+		List<Vacante> listVacante=vacantesService.buscarTodas();
+		model.addAttribute("detalleVacante_detalleVacante",listVacante);
+		return "vacantes/mostrarTodas";
+	}
 	@GetMapping("/detalle/{id}")
-	public String goDetalle(@PathVariable("id") int idvacante, Model model) {
+	public String mostrardetalle(@PathVariable("id") int idvacante, Model model) {
 		Vacante vacante=vacantesService.buscarXId(idvacante);	
 		model.addAttribute("vacante_Detalle",vacante);
 		return "descripcionVacante";
-	}
-	
-	@GetMapping("/insertaVacante")
-	public String goInsertaVacante(Vacante vacante, Model model) {
+	}	
+	@GetMapping("/insertarVacante")
+	public String insertarVacante(Vacante vacante, Model model) {
 		ArrayList<Categoria> categoriaList=categoriasService.buscarTodas();
 		model.addAttribute("InsertaVacante_categorias_list", categoriaList);
-		return "vacantes/insertaVacante";
+		return "vacantes/insertarVacante";
 	}
-	
 	@GetMapping("/eliminarVacante/{id}")
 	public String eliminarVacante(@PathVariable("id") int idVacante,
 								RedirectAttributes attributes)
@@ -59,7 +64,7 @@ public class VacantesController {
 		System.out.println("el id a eliminar es: "+idVacante);
 		vacantesService.eliminarVacante(idVacante);
 		attributes.addFlashAttribute("eliminarVacante_eliminadoExitoso","Eliminado");
-		return "redirect:/detalleVacante";
+		return "redirect:/vacantes/mostrarTodas";
 	} 
 	@GetMapping("/modificarVacante/{id}")
 	public String modificarVacante(@PathVariable("id") int idVacante, RedirectAttributes attributes)
@@ -70,15 +75,14 @@ public class VacantesController {
 		System.out.println(vacante.getCategoria());
 		if(vacante!=null) {
 			attributes.addFlashAttribute("vacante", vacante);
-			return "redirect:/vacantes/insertaVacante";
+			return "redirect:/vacantes/insertarVacante";
 		}
 		return "home";
 	}
-	
 	@PostMapping("/guardarVacante")
 	public String guardarVacante(Vacante vacante, 
-								@RequestParam("insertaVacante_imagen") MultipartFile imagen, 
-								//@RequestParam("insertaVacante_categoria_txt")int idCategoria,
+								@RequestParam("insertarVacante_imagen") MultipartFile imagen, 
+								//@RequestParam("insertarVacante_categoria_txt")int idCategoria,
 								BindingResult bindingResult, 
 								RedirectAttributes attributes) {
 		
@@ -87,7 +91,7 @@ public class VacantesController {
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error:bindingResult.getAllErrors())
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
-			return "vacantes/insertaVacante";
+			return "vacantes/insertarVacante";
 		}
 		//Procesamiento de la imagen
 		if(!imagen.isEmpty()) {
@@ -104,7 +108,7 @@ public class VacantesController {
 		//Cuando se hace un redirect las varibles en el objeto model se pierden, por lo que hay que usar un atributo flash
 		attributes.addFlashAttribute("guardarVacante_guardarVacante", exitoso);
 		//se realiza peticion get a detalleVacante
-		return "redirect:/detalleVacante";
+		return "redirect:/vacantes/mostrarTodas";
 	}
 	//metodo para dar formato dd-mm-yyyy a las fechas que se usan para databinding
 	@InitBinder

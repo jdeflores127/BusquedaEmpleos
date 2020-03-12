@@ -27,13 +27,7 @@ public class HomeController {
 	@Autowired
 	private IUsuarioService usuarioService;
 	@Autowired
-	private ICategoriasService categoriaService;
-	@GetMapping("/detalleVacante")
-	public String godetalleVacante(Model model) {
-		List<Vacante> listVacante=vacanteService.buscarTodas();
-		model.addAttribute("detalleVacante_detalleVacante",listVacante);
-		return "detalleVacante";
-	}	
+	private ICategoriasService categoriaService;	
 	@GetMapping("/")
 	public String goHome(Model model, Vacante vacante) {
 		String bienvenida="bienvenidos al sistema de busqueda de empleo";

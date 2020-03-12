@@ -7,26 +7,6 @@ CREATE TABLE  Categorias (
   descripcion varchar(100)
 ); 
 
-
-CREATE TABLE  Perfiles (
-  id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  perfil varchar(100) NOT NULL
-); 
-
-
-CREATE TABLE  Usuarios (
-  id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  nombre varchar(45) NOT NULL,
-  email varchar(100) NOT NULL,
-  username varchar(45) NOT NULL,
-  password varchar(100) NOT NULL,
-  estatus int(11) NOT NULL DEFAULT '1',
-  fechaRegistro date DEFAULT NULL,
-  UNIQUE KEY username_UNIQUE (username),
-  UNIQUE KEY email_UNIQUE (email)
-); 
-
-
 CREATE TABLE  Vacantes (
   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nombre varchar(200) NOT NULL,
@@ -42,6 +22,32 @@ CREATE TABLE  Vacantes (
 ); 
 
 
+
+CREATE TABLE  Usuarios (
+  id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nombre varchar(45) NOT NULL,
+  email varchar(100) NOT NULL,
+  username varchar(45) NOT NULL,
+  password varchar(100) NOT NULL,
+  estatus int(11) NOT NULL DEFAULT '1',
+  fechaRegistro date DEFAULT NULL,
+  UNIQUE KEY username_UNIQUE (username),
+  UNIQUE KEY email_UNIQUE (email)
+);
+
+CREATE TABLE  Perfiles (
+  id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  perfil varchar(100) NOT NULL
+); 
+
+CREATE TABLE  UsuarioPerfil (
+  idUsuario int(11) NOT NULL,
+  idPerfil int(11) NOT NULL,
+  UNIQUE KEY Usuario_Perfil_UNIQUE (idUsuario,idPerfil),
+  CONSTRAINT fk_Usuarios1 FOREIGN KEY (idUsuario) REFERENCES Usuarios (id),
+  CONSTRAINT fk_Perfiles1 FOREIGN KEY (idPerfil) REFERENCES Perfiles (id)
+);
+ 
 CREATE TABLE  Solicitudes (
   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   fecha date NOT NULL,
@@ -54,14 +60,21 @@ CREATE TABLE  Solicitudes (
   CONSTRAINT fk_Solicitudes_Vacantes1 FOREIGN KEY (idVacante) REFERENCES Vacantes (id)
 ); 
 
+--Tablas para uso por defecto de spring security
+CREATE TABLE users (
+	username varchar(50) PRIMARY KEY NOT NULL,
+	password varchar(50) NOT NULL,
+	enabled tinyint(1) NOT NULL
+);
 
-CREATE TABLE  UsuarioPerfil (
-  idUsuario int(11) NOT NULL,
-  idPerfil int(11) NOT NULL,
-  UNIQUE KEY Usuario_Perfil_UNIQUE (idUsuario,idPerfil),
-  CONSTRAINT fk_Usuarios1 FOREIGN KEY (idUsuario) REFERENCES Usuarios (id),
-  CONSTRAINT fk_Perfiles1 FOREIGN KEY (idPerfil) REFERENCES Perfiles (id)
+-- Crear tabla de roles
+CREATE TABLE authorities (
+	username varchar(50) NOT NULL,
+	authority varchar(50) NOT NULL,
+	UNIQUE KEY authorities_idx_1 (username,authority),
+	CONSTRAINT authorities_ibfk_1 FOREIGN KEY (username) REFERENCES users (username)
 ); 
+
 
 CREATE INDEX  fk_vacantes_categorias1_idx ON Vacantes(idCategoria);
 CREATE INDEX  fk_Solicitudes_Vacantes1_idx ON Solicitudes(idVacante);

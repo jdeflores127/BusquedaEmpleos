@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Categoria;
+import com.mx.SprigBootUdemy.BusquedaEmpleos.Modelos.Vacante;
 import com.mx.SprigBootUdemy.BusquedaEmpleos.Servicios.ICategoriasService;
 
 @Controller
@@ -19,18 +21,27 @@ public class CategoriasController {
 	@Autowired
 	ICategoriasService categoriasService;
 	
-	@GetMapping("/insertaCategoria")
-	public String goInsertaCategoria(Model model) {
-		return "categorias/insertaCategoria";
+	@GetMapping("/insertarCategoria")
+	public String insertarCategoria(Model model) {
+		return "categorias/insertarCategoria";
 	}
+	public String eliminarCategoria(@PathVariable("id") int idCategoria) {
+		return "categorias/eliminarCategoria";
+	}
+	public String modificarCategoria() {
+		return "categorias/modificarCategoria";
+	}
+	public String guardarVacante(Vacante vacante) {
+		return "categorias/mostrarTodas";
+	} 
 	@GetMapping("/mostrarTodas")
-	public String goMostrarTodas(Model model) {
+	public String mostrarTodas(Model model) {
 		ArrayList<Categoria> categoria_list=categoriasService.buscarTodas();
 		model.addAttribute("MostrarTodas_listCategorias", categoria_list);
 		return "categorias/mostrarTodas";
 	}
 	@GetMapping("/buscarXid")
-	public String goBuscarXId() {
+	public String buscarXId() {
 		return "categorias/buscarXid";
 	}
 	
@@ -39,7 +50,7 @@ public class CategoriasController {
 	public String guardarCategoria(Categoria categoria){
 		System.out.println("categoria guardada: "+categoria.toString());
 		categoriasService.guardar(categoria);
-		return "categorias/insertaCategoria";
+		return "categorias/insertarCategoria";
 	}
 	
 	@PostMapping("/buscarCategoria")
@@ -59,7 +70,7 @@ public class CategoriasController {
 		System.out.println("Datos traidos del form");
 		System.out.println("nombre: "+nombre);
 		System.out.println("descripcion: "+descripcion);
-		return "categorias/insertaCategoria";
+		return "categorias/insertarCategoria";
 	}*/
 	
 }

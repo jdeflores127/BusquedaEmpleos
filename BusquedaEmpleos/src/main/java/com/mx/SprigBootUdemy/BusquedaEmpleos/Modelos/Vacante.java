@@ -66,7 +66,7 @@ public class Vacante {
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
-	public Boolean isDestacado() {
+	public Boolean getDestacado() {
 		return destacado;
 	}
 	public void setDestacado(Boolean destacado) {

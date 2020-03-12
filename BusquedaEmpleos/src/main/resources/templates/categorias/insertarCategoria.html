@@ -18,7 +18,7 @@
 				<div class="card">
 					<div class="card-header"> Categoria </div>
 					<div class="card-body">
-						<form action="guardarCategoria" method="POST">
+						<form th:action="@{/categorias/guardarCategoria}" method="post">
 						<div class="form-group">
 							<label class="card-text" for="inputNombre">Nombre: </label> 
 							<input type="text" class="form-control" name="nombre" id="nombre"> 
